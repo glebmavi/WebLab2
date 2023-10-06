@@ -17,7 +17,7 @@ function responseGetter() {
         for (const xValue of xValues) {
             try {
                 formData.append("X", xValue);
-                const response = await fetch("./src/check.php", {
+                const response = await fetch("src/main/java/co/glebmavi/webproglab2/servlets/ControllerServlet.java", {
                     method: "POST",
                     dataType: "json",
                     body: formData,

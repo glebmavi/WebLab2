@@ -67,9 +67,10 @@ function writeInputs(xValues, yValue, rValue, tableData) {
         yInput.dispatchEvent(new Event('input', { bubbles: true }));
     }
 
-    const rRadios = document.querySelector(`.Rselection[value="${rValue}"]`);
-    if (rRadios) {
-        rRadios.click();
+    const rInput = document.getElementById('RSelect');
+    if (rValue !== null) {
+        rInput.value = rValue;
+        rInput.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
     const tableBody = document.querySelector('#resultTable tbody');

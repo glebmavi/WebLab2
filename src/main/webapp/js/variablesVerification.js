@@ -35,12 +35,12 @@ function formListener() {
         });
     });
 
-    const inputElement = document.getElementById('YText');
+    const yInputElement = document.getElementById('YText');
     const validationMessageElement = document.getElementById("YMessage");
     const yValue = document.getElementById('yValue');
 
-    inputElement.addEventListener("input", function () {
-        const inputValue = inputElement.value;
+    yInputElement.addEventListener("input", function () {
+        const inputValue = yInputElement.value;
 
         if (!(inputValue.search(/[^0-9.-]/) !== -1) && (inputValue.length < 18) && (!isNaN(parseFloat(inputValue))) && parseFloat(inputValue) >= -5 && parseFloat(inputValue) <= 3) {
             validationMessageElement.textContent = "Верный ввод";
@@ -53,8 +53,7 @@ function formListener() {
             validationMessageElement.style.color = "#AA2222";
             ySet = false;
             checkVariablesSet();
-        }
-        else {
+        } else {
             validationMessageElement.textContent = "Ошибка. Введите число от -5 до 3";
             validationMessageElement.style.color = "#AA2222";
             ySet = false;
@@ -63,20 +62,16 @@ function formListener() {
         localStorage.setItem('Y', inputValue);
     });
 
-    const rRadios = document.querySelectorAll('.Rselection');
+    const rInputElement = document.getElementById('RSelect');
     const rValue = document.getElementById('rValue');
 
-    rRadios.forEach(radio => {
-        radio.addEventListener('click', () => {
-            if (radio.checked) {
-                rValue.innerText = 'R= ' + radio.value;
-                rSet = true;
-                checkVariablesSet();
-                drawR(radio.value, RText, RHalfText, MinusRHalfText, MinusRText);
-                removePoints();
-                localStorage.setItem('R', radio.value);
-            }
-        });
+    rInputElement.addEventListener("change", function () {
+        rValue.innerText = 'R= ' + rInputElement.value;
+        rSet = true;
+        checkVariablesSet();
+        drawR(rInputElement.value, RText, RHalfText, MinusRHalfText, MinusRText);
+        removePoints();
+        localStorage.setItem('R', rInputElement.value);
     });
 
     writeInputs(loadedData.xValues, loadedData.yValue, loadedData.rValue, loadedData.tableData);
