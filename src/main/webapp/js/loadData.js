@@ -73,9 +73,6 @@ function writeInputs(xValues, yValue, rValue, tableData) {
         rInput.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
-    const tableBody = document.querySelector('#resultTable tbody');
-    writeTable(tableData, tableBody);
-
     localStorage.setItem('tableData', JSON.stringify(tableData));
 
 }

@@ -246,8 +246,6 @@ function writeInputs(xValues, yValue, rValue, tableData) {
       bubbles: true
     }));
   }
-  var tableBody = document.querySelector('#resultTable tbody');
-  writeTable(tableData, tableBody);
   localStorage.setItem('tableData', JSON.stringify(tableData));
 }
 

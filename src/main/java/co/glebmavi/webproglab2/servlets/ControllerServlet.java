@@ -51,6 +51,7 @@ public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
         logger.info("doGet() called");
         logger.info("Redirecting to index.jsp");
         request.setAttribute("hitHistory", hitHistory);
+        request.getSession().setAttribute("hitHistory", hitHistory);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

@@ -99,7 +99,6 @@
         <jsp:useBean id="hitHistory"
                      scope="session"
                      class="co.glebmavi.webproglab2.beans.HitHistory"
-                     type="co.glebmavi.webproglab2.beans.HitHistory"
         />
         <c:forEach var="hit" items="${hitHistory.getHitList()}">
           <tr>
