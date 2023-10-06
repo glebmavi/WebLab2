@@ -1,9 +1,8 @@
-import {drawPoint, removePoints} from "./drawer.js";
-import {loadTableData, writeTable} from "./loadData.js";
+import {removePoints} from "./drawer.js";
+import {loadTableData} from "./loadData.js";
 
 function responseGetter() {
     const svgGraph = document.getElementById("svgGraph");
-    const tableBody = document.querySelector('#resultTable tbody');
     const form = document.getElementById('form');
 
     form.addEventListener("submit", async function (event) {
@@ -11,66 +10,36 @@ function responseGetter() {
         removePoints();
 
         const formData = new FormData(form);
-        const xValues = formData.getAll("X");
-        formData.delete("X");
 
-        for (const xValue of xValues) {
-            try {
-                formData.append("X", xValue);
-                const response = await fetch("src/main/java/co/glebmavi/webproglab2/servlets/ControllerServlet.java", {
-                    method: "POST",
-                    dataType: "json",
-                    body: formData,
-                });
+        try {
+            const response = await fetch("/WebProgLab2/controller", {
+                method: "POST",
+                dataType: "json",
+                body: formData,
+            });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const responseData = await response.json();
-                let time = new Date(responseData.currentTime);
-                time = new Date(time.getTime() - (time.getTimezoneOffset() * 60 * 1000));
-                const options = {
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    second: 'numeric'
-                };
-
-                const jsonData = {
-                    X: responseData.X,
-                    Y: responseData.Y,
-                    R: responseData.R,
-                    hit: responseData.hit,
-                    currentTime: time.toLocaleString(undefined, options),
-                    executionTime: (parseFloat(responseData.executionTime) * 1000).toFixed(2) + "ms"
-                }
-
-                // const newRow = `
-                //     <tr>
-                //         <td>${jsonData.X}</td>
-                //         <td>${jsonData.Y}</td>
-                //         <td>${jsonData.R}</td>
-                //         <td>${jsonData.hit}</td>
-                //         <td>${jsonData.currentTime}</td>
-                //         <td>${jsonData.executionTime}</td>
-                //     </tr>
-                // `;
-                //
-                // tableBody.insertAdjacentHTML("beforeend", newRow);
-                appendTableDataLocalStorage(JSON.stringify(jsonData));
-                writeTable(loadTableData(), tableBody);
-                drawPoint(responseData.X, responseData.Y, responseData.R, svgGraph);
-            } catch (error) {
-                alert('Error: ' + error.message);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
+
+            const data = await response.text();
+            handleResponse(data);
+            } catch (error) {
+            alert('Error: ' + error.message);
         }
     });
 }
 
-function appendTableDataLocalStorage(data) {
+function handleResponse(data) {
+    document.write(data);
+    // Dispatch the DOMContentLoaded event if needed
+    window.document.dispatchEvent(new Event("DOMContentLoaded", {
+        bubbles: true,
+        cancelable: true
+    }));
+}
+
+function appendTableDataLocalStorage(data) { // TODO: perhaps update table?
     const dataArray = loadTableData();
 
     dataArray.push(data);

@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
   String[] checkboxValues = {"-4", "-3", "-2", "-1", "0", "1", "2", "3", "4"};
   String[] selectValues = {"1", "1.5", "2", "2.5", "3"};
@@ -8,10 +9,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lab1</title>
+  <title>Lab2</title>
   <link rel="icon" type="image/x-icon" href="graph.svg">
   <link rel="stylesheet" href="styles.css">
-  <script src="dist/bundle.js"></script>
+  <script src="dist/indexBundle.js"></script>
 </head>
 <body>
 
@@ -39,7 +40,7 @@
               <%
               for (String value : checkboxValues) {
               %>
-              <label><%= value %><input type="checkbox" class='Xselection' value="<%= value %>" name="X"></label>
+              <label><%=value%><input type="checkbox" class='Xselection' value="<%=value%>" name="X"></label>
               <%
                 }
               %>
@@ -65,7 +66,7 @@
                 <%
                 for (String value : selectValues) {
                 %>
-                <option value="<%= value %>" class='Rselection'><%= value %></option>
+                <option value="<%=value%>" class='Rselection'><%=value%></option>
                 <%
                   }
                 %>
@@ -95,7 +96,21 @@
         </tr>
         </thead>
         <tbody>
-
+        <jsp:useBean id="hitHistory"
+                     scope="session"
+                     class="co.glebmavi.webproglab2.beans.HitHistory"
+                     type="co.glebmavi.webproglab2.beans.HitHistory"
+        />
+        <c:forEach var="hit" items="${hitHistory.getHitList()}">
+          <tr>
+            <td>${hit.getX()}</td>
+            <td>${hit.getY()}</td>
+            <td>${hit.getR()}</td>
+            <td>${hit.isHit()}</td>
+            <td>${hit.getCurrentDate()}</td>
+            <td>${hit.getExecutionTime()} ms</td>
+          </tr>
+        </c:forEach>
         </tbody>
 
       </table>

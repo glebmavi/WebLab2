@@ -4,6 +4,6 @@ import {resetTable} from "./js/resetTable";
 
 document.addEventListener('DOMContentLoaded', function () {
     formListener();
-    responseGetter();
     resetTable();
+    responseGetter();
 });
