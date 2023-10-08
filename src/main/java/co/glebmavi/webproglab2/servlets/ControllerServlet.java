@@ -50,6 +50,7 @@ public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("doGet() called");
         logger.info("Redirecting to index.jsp");
+        request.setAttribute("lang", request.getParameter("lang"));
         request.setAttribute("hitHistory", hitHistory);
         request.getSession().setAttribute("hitHistory", hitHistory);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);

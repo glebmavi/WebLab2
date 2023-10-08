@@ -13,7 +13,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _loadData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 
 
-function formListener() {
+var translations = {
+  "en": {
+    "correctInput": "Correct input",
+    "numberTooLarge": "Error! Number too large",
+    "numberOutOfRange": "Error! Enter a number from -5 to 3"
+  },
+  "ru": {
+    "correctInput": "Верный ввод",
+    "numberTooLarge": "Ошибка! Слишком длинное число",
+    "numberOutOfRange": "Ошибка! Введите число от -5 до 3"
+  },
+  "es": {
+    "correctInput": "Valor correcto",
+    "numberTooLarge": "Error! Número demasiado largo",
+    "numberOutOfRange": "Error! Introduzca un número de -5 a 3"
+  }
+};
+function formListener(locale) {
   var RText = document.getElementsByClassName("RText");
   var RHalfText = document.getElementsByClassName("RHalfText");
   var MinusRHalfText = document.getElementsByClassName("MinusRHalfText");
@@ -52,18 +69,18 @@ function formListener() {
   yInputElement.addEventListener("input", function () {
     var inputValue = yInputElement.value;
     if (!(inputValue.search(/[^0-9.-]/) !== -1) && inputValue.length < 18 && !isNaN(parseFloat(inputValue)) && parseFloat(inputValue) >= -5 && parseFloat(inputValue) <= 3) {
-      validationMessageElement.textContent = "Верный ввод";
+      validationMessageElement.textContent = translations[locale].correctInput;
       validationMessageElement.style.color = "#22AA22";
       yValue.innerText = 'Y= ' + parseFloat(inputValue);
       ySet = true;
       checkVariablesSet();
     } else if (inputValue.length >= 18) {
-      validationMessageElement.textContent = "Ошибка. Слишком длинное число";
+      validationMessageElement.textContent = translations[locale].numberTooLarge;
       validationMessageElement.style.color = "#AA2222";
       ySet = false;
       checkVariablesSet();
     } else {
-      validationMessageElement.textContent = "Ошибка. Введите число от -5 до 3";
+      validationMessageElement.textContent = translations[locale].numberOutOfRange;
       validationMessageElement.style.color = "#AA2222";
       ySet = false;
       checkVariablesSet();
@@ -326,9 +343,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   loadTheme: () => (/* binding */ loadTheme)
 /* harmony export */ });
+var toggleButton = document.querySelector('#toggleTheme');
 function setTheme(theme) {
   var html = document.querySelector('html');
-  var toggleButton = document.querySelector('#toggleTheme');
   if (theme === "theme-dark") {
     html.dataset.theme = "theme-dark";
     toggleButton.innerHTML = "<img src=\"assets/sun-svgrepo-com.svg\" alt=\"SVG Image\">";
@@ -339,7 +356,6 @@ function setTheme(theme) {
   localStorage.setItem('theme', html.dataset.theme);
 }
 function themeListener() {
-  var toggleButton = document.querySelector('#toggleTheme');
   toggleButton.addEventListener('click', function () {
     if (localStorage.getItem('theme') === "theme-light") {
       setTheme("theme-dark");
@@ -384,6 +400,32 @@ function resetTable() {
       location.reload();
     });
   });
+}
+
+
+/***/ }),
+/* 8 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   localeManager: () => (/* binding */ localeManager)
+/* harmony export */ });
+function localeManager(locale) {
+  if (document.querySelector('html').lang !== locale) {
+    setLocale(locale);
+  }
+  var localeSelect = document.getElementById("locale-select");
+  localeSelect.addEventListener("change", function () {
+    if (localeSelect.value) {
+      setLocale(localeSelect.value);
+    }
+  });
+}
+function setLocale(locale) {
+  document.querySelector('html').lang = locale;
+  localStorage.setItem('locale', locale);
+  document.location.href = "?sessionLocale=" + locale;
 }
 
 
@@ -452,13 +494,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_responseGetter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
 /* harmony import */ var _js_resetTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
 /* harmony import */ var _js_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
+/* harmony import */ var _js_locale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
+
 
 
 
 
 document.addEventListener('DOMContentLoaded', function () {
   (0,_js_theme__WEBPACK_IMPORTED_MODULE_3__.loadTheme)();
-  (0,_js_variablesVerification__WEBPACK_IMPORTED_MODULE_0__.formListener)();
+  var locale = localStorage.getItem('locale') || 'en';
+  (0,_js_locale__WEBPACK_IMPORTED_MODULE_4__.localeManager)(locale);
+  (0,_js_variablesVerification__WEBPACK_IMPORTED_MODULE_0__.formListener)(locale);
   (0,_js_resetTable__WEBPACK_IMPORTED_MODULE_2__.resetTable)();
   (0,_js_responseGetter__WEBPACK_IMPORTED_MODULE_1__.responseGetter)();
 });

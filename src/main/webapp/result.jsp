@@ -1,7 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="i18n.messages"/>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${sessionScope.lang}">
 <head>
     <title>Result</title>
     <meta charset="UTF-8">
@@ -10,13 +13,15 @@
 </head>
 <body>
 
+<div id="hat">
 <jsp:include page="theme.html"/>
+</div>
 
 <table>
     <tr>
         <td>
             <h1>
-                Маликов Глеб Игоревич P3224 вариант 24923
+                <fmt:message key="index.myName"/> P3224 <fmt:message key="index.variant"/> 24923
             </h1>
         </td>
     </tr>
@@ -34,9 +39,9 @@
                     <th>X</th>
                     <th>Y</th>
                     <th>R</th>
-                    <th>Попадание</th>
-                    <th>Время</th>
-                    <th>Время работы скрипта</th>
+                    <th><fmt:message key="index.resultTable.hit"/></th>
+                    <th><fmt:message key="index.resultTable.time"/></th>
+                    <th><fmt:message key="index.resultTable.executionTime"/></th>
                 </tr>
                 </thead>
                 <jsp:useBean id="currentHitHistory"
@@ -65,7 +70,7 @@
         <td>
 
             <a href="${pageContext.request.contextPath}/">
-                <button id="backButton">Назад</button>
+                <button id="backButton"><fmt:message key="result.back"/></button>
             </a>
         </td>
     </tr>
