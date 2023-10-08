@@ -20,7 +20,7 @@
 <body>
 
 <div id="hat">
-  <jsp:include page="theme.html"/>
+  <jsp:include page="theme.jsp"/>
   <jsp:include page="locales.jsp"/>
 </div>
 

@@ -1,12 +1,16 @@
 function setTheme(theme) {
     const html = document.querySelector('html');
-    const toggleButton = document.querySelector('#toggleTheme');
+    const toggleThemeButton = document.querySelector('#toggleTheme');
+    const toggleLocaleButton = document.querySelector('#toggleLocale');
+
     if (theme === "theme-dark") {
         html.dataset.theme = "theme-dark";
-        toggleButton.innerHTML = `<img src="assets/sun-svgrepo-com.svg" alt="SVG Image">`;
+        toggleThemeButton.innerHTML = `<img src="assets/sun-svgrepo-com.svg" alt="SVG Image">`;
+        if (toggleLocaleButton) toggleLocaleButton.innerHTML = `<img src="assets/language-dark.svg" alt="SVG Image">`;
     } else {
         html.dataset.theme = "theme-light";
-        toggleButton.innerHTML = `<img src="assets/moon-svgrepo-com.svg" alt="SVG Image">`;
+        toggleThemeButton.innerHTML = `<img src="assets/moon-svgrepo-com.svg" alt="SVG Image">`;
+        if (toggleLocaleButton) toggleLocaleButton.innerHTML = `<img src="assets/language-light.svg" alt="SVG Image">`;
     }
     localStorage.setItem('theme', html.dataset.theme);
 }

@@ -147,6 +147,16 @@ button:disabled {
   height: 50px;
   background-color: transparent;
 }
+.hatDivElement img {
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.hatDivElement img:hover {
+  transform: scale(1.3);
+}
 #toggleTheme {
   position: absolute;
   top: 50%;
@@ -170,18 +180,48 @@ button:disabled {
 #toggleTheme img:hover {
   transform: scale(1.3);
 }
-#locale-select {
+#toggleLocale {
   position: absolute;
   top: 50%;
-  right: 5%;
+  right: 3%;
   margin: 5px;
   padding: 5px;
   border-radius: 5px;
   transform: translateY(-50%);
   background-color: transparent;
 }
-#locale-select:hover {
+#toggleLocale img {
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+#toggleLocale img:hover {
+  transform: scale(1.3);
+}
+#toggleLocale:hover {
   background-color: #cccccc88;
+}
+#localeSelect {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 3%;
+  border-radius: 5px;
+  background-color: transparent;
+}
+.localeOption {
+  color: var(--text-color);
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  margin: 3px 0 3px 0;
+  padding: 3px;
+}
+.localeOption:hover {
+  background-color: #cccccc88;
+  transform: scale(1.3);
 }
 h1 {
   font-family: monospace;

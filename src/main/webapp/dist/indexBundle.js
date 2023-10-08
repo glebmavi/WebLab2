@@ -343,19 +343,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   loadTheme: () => (/* binding */ loadTheme)
 /* harmony export */ });
-var toggleButton = document.querySelector('#toggleTheme');
 function setTheme(theme) {
   var html = document.querySelector('html');
+  var toggleThemeButton = document.querySelector('#toggleTheme');
+  var toggleLocaleButton = document.querySelector('#toggleLocale');
   if (theme === "theme-dark") {
     html.dataset.theme = "theme-dark";
-    toggleButton.innerHTML = "<img src=\"assets/sun-svgrepo-com.svg\" alt=\"SVG Image\">";
+    toggleThemeButton.innerHTML = "<img src=\"assets/sun-svgrepo-com.svg\" alt=\"SVG Image\">";
+    if (toggleLocaleButton) toggleLocaleButton.innerHTML = "<img src=\"assets/language-dark.svg\" alt=\"SVG Image\">";
   } else {
     html.dataset.theme = "theme-light";
-    toggleButton.innerHTML = "<img src=\"assets/moon-svgrepo-com.svg\" alt=\"SVG Image\">";
+    toggleThemeButton.innerHTML = "<img src=\"assets/moon-svgrepo-com.svg\" alt=\"SVG Image\">";
+    if (toggleLocaleButton) toggleLocaleButton.innerHTML = "<img src=\"assets/language-light.svg\" alt=\"SVG Image\">";
   }
   localStorage.setItem('theme', html.dataset.theme);
 }
 function themeListener() {
+  var toggleButton = document.querySelector('#toggleTheme');
   toggleButton.addEventListener('click', function () {
     if (localStorage.getItem('theme') === "theme-light") {
       setTheme("theme-dark");
@@ -415,12 +419,26 @@ function localeManager(locale) {
   if (document.querySelector('html').lang !== locale) {
     setLocale(locale);
   }
-  var localeSelect = document.getElementById("locale-select");
-  localeSelect.addEventListener("change", function () {
-    if (localeSelect.value) {
-      setLocale(localeSelect.value);
+  var localeButton = document.getElementById("toggleLocale");
+  var localeSelect = document.getElementById("localeSelect");
+  localeButton.addEventListener("click", function () {
+    if (localeSelect.style.display === "block") {
+      localeSelect.style.display = "none";
+    } else {
+      localeSelect.style.display = "block";
     }
   });
+  var options = localeSelect.children;
+  var _loop = function _loop(i) {
+    options[i].addEventListener("click", function () {
+      if (options[i].id !== locale) {
+        setLocale(options[i].id);
+      }
+    });
+  };
+  for (var i = 0; i < options.length; i++) {
+    _loop(i);
+  }
 }
 function setLocale(locale) {
   document.querySelector('html').lang = locale;
