@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
 
     private static final Logger logger = Logger.getLogger(ControllerServlet.class.getName());
-    private final HitHistory hitHistory;
+    private HitHistory hitHistory;
 
     public ControllerServlet() {
         hitHistory = new HitHistory();
@@ -50,6 +50,16 @@ public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("doGet() called");
         logger.info("Redirecting to index.jsp");
+        request.setAttribute("hitHistory", hitHistory);
+        request.getSession().setAttribute("hitHistory", hitHistory);
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.info("doRemove() called");
+        logger.info("Redirecting to index.jsp");
+        hitHistory = new HitHistory();
         request.setAttribute("hitHistory", hitHistory);
         request.getSession().setAttribute("hitHistory", hitHistory);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);

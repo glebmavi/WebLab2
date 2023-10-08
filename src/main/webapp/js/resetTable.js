@@ -1,8 +1,12 @@
 function resetTable() {
     const resetButton = document.getElementById('resetTable');
     resetButton.addEventListener('click', () => {
-        document.querySelector('#resultTable tbody').innerHTML = '';
-        localStorage.setItem('tableData', '');
+        const response = fetch("/WebProgLab2/controller", {
+            method: "DELETE",
+        });
+        response.then(() => {
+            location.reload();
+        });
     });
 }
 

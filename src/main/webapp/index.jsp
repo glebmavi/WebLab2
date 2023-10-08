@@ -10,11 +10,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Lab2</title>
-  <link rel="icon" type="image/x-icon" href="graph.svg">
+  <link rel="icon" type="image/x-icon" href="assets/graph.svg">
   <link rel="stylesheet" href="styles.css">
   <script src="dist/indexBundle.js"></script>
 </head>
 <body>
+
+<jsp:include page="theme.html"/>
 
 <table>
   <tr>
@@ -26,7 +28,7 @@
   </tr>
   <tr>
     <td>
-      <jsp:include page="graph.svg"/>
+      <jsp:include page="assets/graph.svg"/>
     </td>
   </tr>
 

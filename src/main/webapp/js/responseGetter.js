@@ -1,8 +1,8 @@
 import {removePoints} from "./drawer.js";
-import {loadTableData} from "./loadData.js";
+import {result} from "./result";
+import {loadTheme} from "./theme";
 
 function responseGetter() {
-    const svgGraph = document.getElementById("svgGraph");
     const form = document.getElementById('form');
 
     form.addEventListener("submit", async function (event) {
@@ -31,20 +31,9 @@ function responseGetter() {
 }
 
 function handleResponse(data) {
-    document.write(data);
-    // Dispatch the DOMContentLoaded event if needed
-    window.document.dispatchEvent(new Event("DOMContentLoaded", {
-        bubbles: true,
-        cancelable: true
-    }));
-}
-
-function appendTableDataLocalStorage(data) { // TODO: perhaps update table?
-    const dataArray = loadTableData();
-
-    dataArray.push(data);
-    const updatedData = JSON.stringify(dataArray);
-    localStorage.setItem('tableData', updatedData);
+    document.documentElement.innerHTML = data;
+    loadTheme();
+    result();
 }
 
 export {responseGetter};

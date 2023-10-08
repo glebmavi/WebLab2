@@ -5,11 +5,12 @@
 <head>
     <title>Result</title>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="graph.svg">
+    <link rel="icon" type="image/x-icon" href="assets/graph.svg">
     <link rel="stylesheet" href="styles.css">
-    <script src="dist/resultBundle.js"></script>
 </head>
 <body>
+
+<jsp:include page="theme.html"/>
 
 <table>
     <tr>
@@ -21,7 +22,7 @@
     </tr>
     <tr>
         <td>
-            <jsp:include page="graph.svg"/>
+            <jsp:include page="assets/graph.svg"/>
         </td>
     </tr>
 
@@ -63,8 +64,8 @@
     <tr>
         <td>
 
-            <a href="${pageContext.request.contextPath}/controller">
-                <button id="backButton">Back</button>
+            <a href="${pageContext.request.contextPath}/">
+                <button id="backButton">Назад</button>
             </a>
         </td>
     </tr>

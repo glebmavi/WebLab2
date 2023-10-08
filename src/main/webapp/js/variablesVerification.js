@@ -74,7 +74,7 @@ function formListener() {
         localStorage.setItem('R', rInputElement.value);
     });
 
-    writeInputs(loadedData.xValues, loadedData.yValue, loadedData.rValue, loadedData.tableData);
+    writeInputs(loadedData.xValues, loadedData.yValue, loadedData.rValue);
 
     function checkVariablesSet() {
         submitElement.disabled = !(xSet && ySet && rSet);

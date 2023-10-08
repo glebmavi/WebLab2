@@ -67,6 +67,7 @@ public class AreaCheckServlet extends jakarta.servlet.http.HttpServlet {
         request.setAttribute("currentHitHistory", currentHitHistory);
         logger.info("HitHistory: " + request.getAttribute("hitHistory"));
         request.getSession().setAttribute("hitHistory", hitHistory);
+        logger.info("Redirecting to result.jsp");
         getServletContext()
                 .getRequestDispatcher("/result.jsp")
                 .forward(request, response);

@@ -1,6 +1,6 @@
-import {drawR, drawPoint} from "./js/drawer";
+import {drawR, drawPoint} from "./drawer";
 
-document.addEventListener('DOMContentLoaded', function () {
+function result() {
     const RText = document.getElementsByClassName("RText");
     const RHalfText = document.getElementsByClassName("RHalfText");
     const MinusRHalfText = document.getElementsByClassName("MinusRHalfText");
@@ -10,9 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const yValues = document.getElementsByClassName("yTableData"); // all y should be equal
     const rValues = document.getElementsByClassName("rTableData"); // all r should be equal
 
-    drawR(rValues[0].value, RText, RHalfText, MinusRHalfText, MinusRText);
+    drawR(rValues[0].innerHTML, RText, RHalfText, MinusRHalfText, MinusRText);
     for (let i = 0; i < xValues.length; i++) {
-        drawPoint(xValues[i].value, yValues[0].value, rValues[0].value, svgGraph);
+        drawPoint(xValues[i].innerHTML, yValues[0].innerHTML, rValues[0].innerHTML, svgGraph);
     }
 
-});
+}
+
+export {result};
