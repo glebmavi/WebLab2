@@ -1,5 +1,6 @@
 import {drawR, removePoints} from "./drawer.js";
 import {loadData, writeInputs} from "./loadData.js";
+import {handleResponse, sendRequest} from "./responseGetter";
 
 const translations = {
     "en": {
@@ -92,16 +93,15 @@ function formListener(locale) {
         localStorage.setItem('R', rInputElement.value);
     });
 
+    writeInputs(loadedData.xValues, loadedData.yValue, loadedData.rValue);
+
     const svgGraph = document.getElementById('svgGraph');
     const form = document.getElementById('form');
     svgGraph.addEventListener('click', function (event) {
         if (xSet && ySet && rSet) {
-            form.dispatchEvent(new Event('submit', {bubbles: true}));
-            return;
+            sendRequest(form).then(r => handleResponse());
         }
     });
-
-    writeInputs(loadedData.xValues, loadedData.yValue, loadedData.rValue);
 
     function checkVariablesSet() {
         submitElement.disabled = !(xSet && ySet && rSet);

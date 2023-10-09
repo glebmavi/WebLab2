@@ -11,6 +11,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _drawer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _loadData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _responseGetter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+
 
 
 var translations = {
@@ -97,17 +99,16 @@ function formListener(locale) {
     (0,_drawer_js__WEBPACK_IMPORTED_MODULE_0__.removePoints)();
     localStorage.setItem('R', rInputElement.value);
   });
+  (0,_loadData_js__WEBPACK_IMPORTED_MODULE_1__.writeInputs)(loadedData.xValues, loadedData.yValue, loadedData.rValue);
   var svgGraph = document.getElementById('svgGraph');
   var form = document.getElementById('form');
   svgGraph.addEventListener('click', function (event) {
     if (xSet && ySet && rSet) {
-      form.dispatchEvent(new Event('submit', {
-        bubbles: true
-      }));
-      return;
+      (0,_responseGetter__WEBPACK_IMPORTED_MODULE_2__.sendRequest)(form).then(function (r) {
+        return (0,_responseGetter__WEBPACK_IMPORTED_MODULE_2__.handleResponse)();
+      });
     }
   });
-  (0,_loadData_js__WEBPACK_IMPORTED_MODULE_1__.writeInputs)(loadedData.xValues, loadedData.yValue, loadedData.rValue);
   function checkVariablesSet() {
     submitElement.disabled = !(xSet && ySet && rSet);
   }
@@ -251,7 +252,9 @@ function writeInputs(xValues, yValue, rValue) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   responseGetter: () => (/* binding */ responseGetter)
+/* harmony export */   handleResponse: () => (/* binding */ handleResponse),
+/* harmony export */   responseGetter: () => (/* binding */ responseGetter),
+/* harmony export */   sendRequest: () => (/* binding */ sendRequest)
 /* harmony export */ });
 /* harmony import */ var _drawer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -263,46 +266,63 @@ function responseGetter() {
   var form = document.getElementById('form');
   form.addEventListener("submit", /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(event) {
-      var formData, response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             event.preventDefault();
             (0,_drawer_js__WEBPACK_IMPORTED_MODULE_0__.removePoints)();
-            formData = new FormData(form);
-            _context.prev = 3;
-            _context.next = 6;
-            return fetch("/WebProgLab2/controller", {
-              method: "POST",
-              dataType: "json",
-              body: formData
+            sendRequest(form).then(function (r) {
+              return handleResponse();
             });
-          case 6:
-            response = _context.sent;
-            if (response.ok) {
-              _context.next = 11;
-              break;
-            }
-            throw new Error("HTTP error! Status: ".concat(response.status));
-          case 11:
-            handleResponse();
-          case 12:
-            _context.next = 17;
-            break;
-          case 14:
-            _context.prev = 14;
-            _context.t0 = _context["catch"](3);
-            alert('Error: ' + _context.t0.message);
-          case 17:
+          case 3:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[3, 14]]);
+      }, _callee);
     }));
     return function (_x) {
       return _ref.apply(this, arguments);
     };
   }());
+}
+function sendRequest(_x2) {
+  return _sendRequest.apply(this, arguments);
+}
+function _sendRequest() {
+  _sendRequest = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(form) {
+    var formData, response;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          formData = new FormData(form);
+          _context2.prev = 1;
+          _context2.next = 4;
+          return fetch("/WebProgLab2/controller", {
+            method: "POST",
+            dataType: "json",
+            body: formData
+          });
+        case 4:
+          response = _context2.sent;
+          if (response.ok) {
+            _context2.next = 7;
+            break;
+          }
+          throw new Error("HTTP error! Status: ".concat(response.status));
+        case 7:
+          _context2.next = 12;
+          break;
+        case 9:
+          _context2.prev = 9;
+          _context2.t0 = _context2["catch"](1);
+          alert('Error: ' + _context2.t0.message);
+        case 12:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[1, 9]]);
+  }));
+  return _sendRequest.apply(this, arguments);
 }
 function handleResponse() {
   document.location.href = "result.jsp";
