@@ -1,6 +1,7 @@
 import {drawR, removePoints} from "./drawer.js";
 import {loadData, writeInputs} from "./loadData.js";
 import {handleResponse, sendRequest} from "./responseGetter";
+import {drawFromTable} from "./drawFromTable";
 
 const translations = {
     "en": {
@@ -90,6 +91,7 @@ function formListener(locale) {
         checkVariablesSet();
         drawR(rInputElement.value, RText, RHalfText, MinusRHalfText, MinusRText);
         removePoints();
+        drawFromTable();
         localStorage.setItem('R', rInputElement.value);
     });
 

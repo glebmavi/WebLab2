@@ -58,23 +58,28 @@ function loadTheme() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   result: () => (/* binding */ result)
+/* harmony export */   drawFromTable: () => (/* binding */ drawFromTable)
 /* harmony export */ });
 /* harmony import */ var _drawer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 
-function result() {
+function drawFromTable() {
   var RText = document.getElementsByClassName("RText");
   var RHalfText = document.getElementsByClassName("RHalfText");
   var MinusRHalfText = document.getElementsByClassName("MinusRHalfText");
   var MinusRText = document.getElementsByClassName("MinusRText");
   var svgGraph = document.getElementById("svgGraph");
   var xValues = document.getElementsByClassName("xTableData");
-  var yValues = document.getElementsByClassName("yTableData"); // all y should be equal
-  var rValues = document.getElementsByClassName("rTableData"); // all r should be equal
-
-  (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawR)(rValues[0].innerHTML, RText, RHalfText, MinusRHalfText, MinusRText);
+  var yValues = document.getElementsByClassName("yTableData");
+  var rValues = document.getElementsByClassName("rTableData");
+  var rValue;
+  if (document.getElementById('RSelect') === null) {
+    rValue = rValues[0].innerHTML;
+  } else {
+    rValue = document.getElementById('RSelect').value;
+  }
+  (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawR)(rValue, RText, RHalfText, MinusRHalfText, MinusRText);
   for (var i = 0; i < xValues.length; i++) {
-    (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawPoint)(xValues[i].innerHTML, yValues[0].innerHTML, rValues[0].innerHTML, svgGraph);
+    (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawPoint)(xValues[i].innerHTML, yValues[i].innerHTML, rValue, svgGraph);
   }
 }
 
@@ -261,7 +266,7 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_theme__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _js_result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _js_drawFromTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _js_locale__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
 
 
@@ -270,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
   (0,_js_theme__WEBPACK_IMPORTED_MODULE_0__.loadTheme)();
   var locale = localStorage.getItem('locale') || 'en';
   (0,_js_locale__WEBPACK_IMPORTED_MODULE_2__.localeManager)(locale);
-  (0,_js_result__WEBPACK_IMPORTED_MODULE_1__.result)();
+  (0,_js_drawFromTable__WEBPACK_IMPORTED_MODULE_1__.drawFromTable)();
 });
 })();
 

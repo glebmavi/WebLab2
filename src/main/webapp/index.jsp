@@ -115,12 +115,12 @@
         />
         <c:forEach var="hit" items="${hitHistory.getHitList()}">
           <tr>
-            <td>${hit.getX()}</td>
-            <td>${hit.getY()}</td>
-            <td>${hit.getR()}</td>
-            <td>${hit.isHit()}</td>
-            <td>${hit.getCurrentDate()}</td>
-            <td>${hit.getExecutionTime()} ms</td>
+            <td class="xTableData">${hit.getX()}</td>
+            <td class="yTableData">${hit.getY()}</td>
+            <td class="rTableData">${hit.getR()}</td>
+            <td class="isHitTableData">${hit.isHit()}</td>
+            <td class="dateTableData">${hit.getCurrentDate()}</td>
+            <td class="execTimeTableData">${hit.getExecutionTime()} ms</td>
           </tr>
         </c:forEach>
         </tbody>

@@ -17,7 +17,7 @@
 
     <servlet-mapping>
         <servlet-name>resultServlet</servlet-name>
-        <url-pattern>/result/*</url-pattern>
+        <url-pattern>/drawFromTable/*</url-pattern>
     </servlet-mapping>
 
 

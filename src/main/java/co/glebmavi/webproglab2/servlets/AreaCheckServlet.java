@@ -54,10 +54,10 @@ public class AreaCheckServlet extends jakarta.servlet.http.HttpServlet {
             hit.setCurrentDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             hit.setHit(isHit(x, y, r));
 
-            long startTime = Long.parseLong(request.getAttribute("startTime").toString());
-            long endTime = new Date().getTime();
+            double startTime = Long.parseLong(request.getAttribute("startTime").toString());
+            double endTime = System.nanoTime();
 
-            hit.setExecutionTime("" + (endTime - startTime));
+            hit.setExecutionTime(String.valueOf((endTime - startTime) / 1000000));
             hitHistory.getHitList().add(hit);
             currentHitHistory.getHitList().add(hit);
             logger.info(hit + "added to history");

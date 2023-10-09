@@ -1,11 +1,8 @@
-import {removePoints} from "./drawer.js";
-
 function responseGetter() {
     const form = document.getElementById('form');
 
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
-        removePoints();
         sendRequest(form).then(r => handleResponse());
     });
 }

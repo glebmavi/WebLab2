@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 import co.glebmavi.webproglab2.beans.HitHistory;
-import java.util.Date;
 import java.util.logging.Logger;
 
 @WebServlet("/controller")
@@ -24,7 +23,7 @@ public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("doPost() called");
-        long startTime = new Date().getTime();
+        long startTime = System.nanoTime();
 
         String[] x = request.getParameterValues("X");
         String y = request.getParameter("Y");

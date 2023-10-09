@@ -12,6 +12,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _drawer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
 /* harmony import */ var _loadData_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 /* harmony import */ var _responseGetter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _drawFromTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+
 
 
 
@@ -97,6 +99,7 @@ function formListener(locale) {
     checkVariablesSet();
     (0,_drawer_js__WEBPACK_IMPORTED_MODULE_0__.drawR)(rInputElement.value, RText, RHalfText, MinusRHalfText, MinusRText);
     (0,_drawer_js__WEBPACK_IMPORTED_MODULE_0__.removePoints)();
+    (0,_drawFromTable__WEBPACK_IMPORTED_MODULE_3__.drawFromTable)();
     localStorage.setItem('R', rInputElement.value);
   });
   (0,_loadData_js__WEBPACK_IMPORTED_MODULE_1__.writeInputs)(loadedData.xValues, loadedData.yValue, loadedData.rValue);
@@ -270,11 +273,10 @@ function responseGetter() {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             event.preventDefault();
-            (0,_drawer_js__WEBPACK_IMPORTED_MODULE_0__.removePoints)();
             sendRequest(form).then(function (r) {
               return handleResponse();
             });
-          case 3:
+          case 2:
           case "end":
             return _context.stop();
         }
@@ -335,6 +337,38 @@ function handleResponse() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   drawFromTable: () => (/* binding */ drawFromTable)
+/* harmony export */ });
+/* harmony import */ var _drawer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+
+function drawFromTable() {
+  var RText = document.getElementsByClassName("RText");
+  var RHalfText = document.getElementsByClassName("RHalfText");
+  var MinusRHalfText = document.getElementsByClassName("MinusRHalfText");
+  var MinusRText = document.getElementsByClassName("MinusRText");
+  var svgGraph = document.getElementById("svgGraph");
+  var xValues = document.getElementsByClassName("xTableData");
+  var yValues = document.getElementsByClassName("yTableData");
+  var rValues = document.getElementsByClassName("rTableData");
+  var rValue;
+  if (document.getElementById('RSelect') === null) {
+    rValue = rValues[0].innerHTML;
+  } else {
+    rValue = document.getElementById('RSelect').value;
+  }
+  (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawR)(rValue, RText, RHalfText, MinusRHalfText, MinusRText);
+  for (var i = 0; i < xValues.length; i++) {
+    (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawPoint)(xValues[i].innerHTML, yValues[i].innerHTML, rValue, svgGraph);
+  }
+}
+
+
+/***/ }),
+/* 6 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   resetTable: () => (/* binding */ resetTable)
 /* harmony export */ });
 function resetTable() {
@@ -351,7 +385,7 @@ function resetTable() {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -402,7 +436,7 @@ function loadTheme() {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -504,9 +538,11 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_variablesVerification__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _js_responseGetter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _js_resetTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _js_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6);
-/* harmony import */ var _js_locale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
+/* harmony import */ var _js_resetTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
+/* harmony import */ var _js_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(7);
+/* harmony import */ var _js_locale__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8);
+/* harmony import */ var _js_drawFromTable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(5);
+
 
 
 
@@ -519,6 +555,7 @@ document.addEventListener('DOMContentLoaded', function () {
   (0,_js_variablesVerification__WEBPACK_IMPORTED_MODULE_0__.formListener)(locale);
   (0,_js_resetTable__WEBPACK_IMPORTED_MODULE_2__.resetTable)();
   (0,_js_responseGetter__WEBPACK_IMPORTED_MODULE_1__.responseGetter)();
+  (0,_js_drawFromTable__WEBPACK_IMPORTED_MODULE_5__.drawFromTable)();
 });
 })();
 
