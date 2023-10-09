@@ -35,6 +35,8 @@
   <tr>
     <td>
       <jsp:include page="assets/graph.svg"/>
+      <div id="svgX">X=</div>
+      <div id="svgY">Y=</div>
     </td>
   </tr>
 

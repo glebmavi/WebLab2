@@ -99,9 +99,21 @@ function formListener(locale) {
 
     const svgGraph = document.getElementById('svgGraph');
     const form = document.getElementById('form');
+    let x, y;
+    svgGraph.onmousemove = function (event) {
+        if (rSet) {
+            x = (event.offsetX - 200) / (120/rInputElement.value);
+            y = (event.offsetY - 200) / (-120/rInputElement.value);
+            document.getElementById('svgX').innerHTML = "X=" + x;
+            document.getElementById('svgY').innerHTML = "Y=" + y;
+        }
+    };
     svgGraph.addEventListener('click', function (event) {
-        if (xSet && ySet && rSet) {
-            sendRequest(form).then(r => handleResponse());
+        if (rSet && x && y) {
+            const formData = new FormData(form);
+            formData.set("X", x);
+            formData.set("Y", y);
+            sendRequest(formData).then(r => handleResponse());
         }
     });
 

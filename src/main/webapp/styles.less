@@ -9,6 +9,7 @@
    --table-border-color: #CCCCCC;
  }
 
+@hoverColor: #cccccc88;
 body {
   background: var(--background-color);
   background-size: 300% 300%;
@@ -20,6 +21,14 @@ body {
 
   svg {
     background-color: transparent;
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover {
+      background-color: @hoverColor;
+    }
+    &:hover + #svgX + #svgY, &:hover + #svgX {
+      visibility: visible;
+    }
 
     .shape {
       fill: #3399FF;
@@ -43,6 +52,10 @@ body {
       fill: var(--text-color);
     }
   }
+}
+
+#svgX, #svgY{
+  visibility: hidden;
 }
 
 @keyframes gradient {
@@ -187,7 +200,6 @@ button {
   }
 }
 
-@hoverColor: #cccccc88;
 #toggleTheme {
   position: absolute;
   top: 50%;

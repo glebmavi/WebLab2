@@ -19,6 +19,15 @@ body {
 }
 body svg {
   background-color: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+}
+body svg:hover {
+  background-color: #cccccc88;
+}
+body svg:hover + #svgX + #svgY,
+body svg:hover + #svgX {
+  visibility: visible;
 }
 body svg .shape {
   fill: #3399FF;
@@ -37,6 +46,10 @@ body svg > line {
 }
 body svg .marker {
   fill: var(--text-color);
+}
+#svgX,
+#svgY {
+  visibility: hidden;
 }
 @keyframes gradient {
   0% {

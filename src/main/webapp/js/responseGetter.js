@@ -3,12 +3,12 @@ function responseGetter() {
 
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
-        sendRequest(form).then(r => handleResponse());
+        const formData = new FormData(form);
+        sendRequest(formData).then(r => handleResponse());
     });
 }
 
-async function sendRequest(form) {
-    const formData = new FormData(form);
+async function sendRequest(formData) {
 
     try {
         const response = await fetch("/WebProgLab2/controller", {
