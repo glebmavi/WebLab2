@@ -1,6 +1,4 @@
 import {removePoints} from "./drawer.js";
-import {result} from "./result";
-import {loadTheme} from "./theme";
 
 function responseGetter() {
     const form = document.getElementById('form');
@@ -20,20 +18,18 @@ function responseGetter() {
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
+            } else {
+                handleResponse();
             }
 
-            const data = await response.text();
-            handleResponse(data);
             } catch (error) {
             alert('Error: ' + error.message);
         }
     });
 }
 
-function handleResponse(data) {
-    document.documentElement.innerHTML = data;
-    loadTheme();
-    result();
+function handleResponse() {
+    document.location.href = "result.jsp";
 }
 
 export {responseGetter};

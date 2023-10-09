@@ -9,4 +9,16 @@
         <location>/error404.jsp</location>
     </error-page>
 
+
+    <servlet>
+        <servlet-name>resultServlet</servlet-name>
+        <servlet-class>co.glebmavi.webproglab2.servlets.ResultServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>resultServlet</servlet-name>
+        <url-pattern>/result/*</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

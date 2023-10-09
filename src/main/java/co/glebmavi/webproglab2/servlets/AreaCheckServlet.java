@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Logger;
 
-
 @WebServlet("/areaCheck")
 public class AreaCheckServlet extends jakarta.servlet.http.HttpServlet {
 
@@ -65,11 +64,12 @@ public class AreaCheckServlet extends jakarta.servlet.http.HttpServlet {
         }
 
         request.setAttribute("currentHitHistory", currentHitHistory);
+        request.getSession().setAttribute("currentHitHistory", currentHitHistory);
         logger.info("HitHistory: " + request.getAttribute("hitHistory"));
         request.getSession().setAttribute("hitHistory", hitHistory);
-        logger.info("Redirecting to result.jsp");
+        logger.info("Redirecting to ResultServlet");
         getServletContext()
-                .getRequestDispatcher("/result.jsp")
+                .getRequestDispatcher("/result")
                 .forward(request, response);
     }
 

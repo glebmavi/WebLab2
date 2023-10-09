@@ -14,8 +14,8 @@
 <body>
 
 <div id="hat">
-    <jsp:include page="theme.jsp"/>
-    <jsp:include page="locales.jsp"/>
+    <jsp:include page="assets/theme.jsp"/>
+    <jsp:include page="assets/locales.jsp"/>
 </div>
 
 <main id="main404">

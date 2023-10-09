@@ -13,7 +13,7 @@
 %>
 <div id="localeDiv" class="hatDivElement">
     <button id="toggleLocale">
-        <img src="assets/language-light.svg" alt="SVG Image">
+        <img src="language-light.svg" alt="SVG Image">
     </button>
 
     <div id="localeSelect">

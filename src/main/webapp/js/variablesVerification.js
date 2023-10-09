@@ -92,6 +92,15 @@ function formListener(locale) {
         localStorage.setItem('R', rInputElement.value);
     });
 
+    const svgGraph = document.getElementById('svgGraph');
+    const form = document.getElementById('form');
+    svgGraph.addEventListener('click', function (event) {
+        if (xSet && ySet && rSet) {
+            form.dispatchEvent(new Event('submit', {bubbles: true}));
+            return;
+        }
+    });
+
     writeInputs(loadedData.xValues, loadedData.yValue, loadedData.rValue);
 
     function checkVariablesSet() {

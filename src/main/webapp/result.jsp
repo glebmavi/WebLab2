@@ -10,11 +10,13 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="assets/graph.svg">
     <link rel="stylesheet" href="styles.css">
+    <script src="dist/resultBundle.js"></script>
 </head>
 <body>
 
 <div id="hat">
-<jsp:include page="theme.jsp"/>
+    <jsp:include page="assets/theme.jsp"/>
+    <jsp:include page="assets/locales.jsp"/>
 </div>
 
 <table>
