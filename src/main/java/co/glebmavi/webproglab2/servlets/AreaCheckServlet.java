@@ -43,7 +43,7 @@ public class AreaCheckServlet extends jakarta.servlet.http.HttpServlet {
             return;
         }
 
-        HitHistory hitHistory = (HitHistory) request.getAttribute("hitHistory");
+        HitHistory hitHistory = (HitHistory) request.getSession().getAttribute("hitHistory");
         HitHistory currentHitHistory = new HitHistory();
 
         for (double x : xValues) {
@@ -63,9 +63,8 @@ public class AreaCheckServlet extends jakarta.servlet.http.HttpServlet {
             logger.info(hit + "added to history");
         }
 
-        request.setAttribute("currentHitHistory", currentHitHistory);
         request.getSession().setAttribute("currentHitHistory", currentHitHistory);
-        logger.info("HitHistory: " + request.getAttribute("hitHistory"));
+        logger.info("HitHistory: " + request.getSession().getAttribute("hitHistory"));
         request.getSession().setAttribute("hitHistory", hitHistory);
         logger.info("Redirecting to ResultServlet");
         getServletContext()

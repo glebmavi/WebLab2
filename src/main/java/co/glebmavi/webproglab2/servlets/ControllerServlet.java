@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 import co.glebmavi.webproglab2.beans.HitHistory;
+import jakarta.servlet.http.HttpSession;
+
 import java.util.logging.Logger;
 
 @WebServlet("/controller")
@@ -14,10 +16,8 @@ import java.util.logging.Logger;
 public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
 
     private static final Logger logger = Logger.getLogger(ControllerServlet.class.getName());
-    private HitHistory hitHistory;
 
     public ControllerServlet() {
-        hitHistory = new HitHistory();
     }
 
     @Override
@@ -29,10 +29,12 @@ public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
         String y = request.getParameter("Y");
         String r = request.getParameter("R");
 
+        HitHistory hitHistory = (HitHistory) request.getSession().getAttribute("hitHistory");
+
         if (x == null || y == null || r == null) {
             request.setAttribute("errorMessage", "Неверный формат данных");
             logger.info("Some data missing");
-            request.setAttribute("hitHistory", hitHistory);
+            request.getSession().setAttribute("hitHistory", hitHistory);
             getServletContext()
                     .getRequestDispatcher("/index.jsp")
                     .forward(request, response);
@@ -40,7 +42,7 @@ public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
         }
 
         request.setAttribute("startTime", startTime);
-        request.setAttribute("hitHistory", hitHistory);
+        request.getSession().setAttribute("hitHistory", hitHistory);
         logger.info("Redirecting to areaCheck");
         getServletContext().getRequestDispatcher("/areaCheck").forward(request, response);
     }
@@ -48,20 +50,19 @@ public class ControllerServlet extends jakarta.servlet.http.HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("doGet() called");
-        logger.info("Redirecting to index.jsp");
+        HitHistory hitHistory = (HitHistory) request.getSession().getAttribute("hitHistory");
         request.setAttribute("lang", request.getParameter("lang"));
-        request.setAttribute("hitHistory", hitHistory);
         request.getSession().setAttribute("hitHistory", hitHistory);
+        logger.info("Redirecting to index.jsp");
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("doRemove() called");
+        request.getSession().setAttribute("hitHistory", new HitHistory());
+        logger.info("Deleted HitHistory");
         logger.info("Redirecting to index.jsp");
-        hitHistory = new HitHistory();
-        request.setAttribute("hitHistory", hitHistory);
-        request.getSession().setAttribute("hitHistory", hitHistory);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }
