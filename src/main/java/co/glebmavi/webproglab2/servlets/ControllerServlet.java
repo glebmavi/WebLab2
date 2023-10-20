@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 import co.glebmavi.webproglab2.beans.HitHistory;
-import jakarta.servlet.http.HttpSession;
 
 import java.util.logging.Logger;
 

@@ -21,6 +21,9 @@ const translations = {
     },
 };
 
+const svgWidth = 400;
+const svgHeight = 400;
+
 function formListener(locale) {
     const RText = document.getElementsByClassName("RText");
     const RHalfText = document.getElementsByClassName("RHalfText");
@@ -102,8 +105,8 @@ function formListener(locale) {
     let x, y;
     svgGraph.onmousemove = function (event) {
         if (rSet) {
-            x = (event.offsetX - 200) / (120/rInputElement.value);
-            y = (event.offsetY - 200) / (-120/rInputElement.value);
+            x = (event.offsetX - (svgWidth/2)) / ((svgWidth*(3/10))/rInputElement.value);
+            y = (event.offsetY - (svgHeight/2)) / ((svgHeight*(-3/10))/rInputElement.value);
             document.getElementById('svgX').innerHTML = "X=" + x;
             document.getElementById('svgY').innerHTML = "Y=" + y;
         }

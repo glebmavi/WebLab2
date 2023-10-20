@@ -34,6 +34,8 @@ var translations = {
     "numberOutOfRange": "Error! Introduzca un número de -5 a 3"
   }
 };
+var svgWidth = 400;
+var svgHeight = 400;
 function formListener(locale) {
   var RText = document.getElementsByClassName("RText");
   var RHalfText = document.getElementsByClassName("RHalfText");
@@ -108,8 +110,8 @@ function formListener(locale) {
   var x, y;
   svgGraph.onmousemove = function (event) {
     if (rSet) {
-      x = (event.offsetX - 200) / (120 / rInputElement.value);
-      y = (event.offsetY - 200) / (-120 / rInputElement.value);
+      x = (event.offsetX - svgWidth / 2) / (svgWidth * (3 / 10) / rInputElement.value);
+      y = (event.offsetY - svgHeight / 2) / (svgHeight * (-3 / 10) / rInputElement.value);
       document.getElementById('svgX').innerHTML = "X=" + x;
       document.getElementById('svgY').innerHTML = "Y=" + y;
     }
