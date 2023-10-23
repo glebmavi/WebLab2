@@ -21,17 +21,20 @@ var translations = {
   "en": {
     "correctInput": "Correct input",
     "numberTooLarge": "Error! Number too large",
-    "numberOutOfRange": "Error! Enter a number from -5 to 3"
+    "numberOutOfRange": "Error! Enter a number from -5 to 3",
+    "selectR": "Select R first"
   },
   "ru": {
     "correctInput": "Верный ввод",
     "numberTooLarge": "Ошибка! Слишком длинное число",
-    "numberOutOfRange": "Ошибка! Введите число от -5 до 3"
+    "numberOutOfRange": "Ошибка! Введите число от -5 до 3",
+    "selectR": "Сначала выберите R"
   },
   "es": {
     "correctInput": "Valor correcto",
     "numberTooLarge": "Error! Número demasiado largo",
-    "numberOutOfRange": "Error! Introduzca un número de -5 a 3"
+    "numberOutOfRange": "Error! Introduzca un número de -5 a 3",
+    "selectR": "Seleccione R primero"
   }
 };
 var svgWidth = 400;
@@ -112,8 +115,8 @@ function formListener(locale) {
     if (rSet) {
       x = (event.offsetX - svgWidth / 2) / (svgWidth * (3 / 10) / rInputElement.value);
       y = (event.offsetY - svgHeight / 2) / (svgHeight * (-3 / 10) / rInputElement.value);
-      document.getElementById('svgX').innerHTML = "X=" + x;
-      document.getElementById('svgY').innerHTML = "Y=" + y;
+      document.getElementById('svgX').innerHTML = "X=" + x.toFixed(3);
+      document.getElementById('svgY').innerHTML = "Y=" + y.toFixed(3);
     }
   };
   svgGraph.addEventListener('click', function (event) {
@@ -124,6 +127,8 @@ function formListener(locale) {
       (0,_responseGetter__WEBPACK_IMPORTED_MODULE_2__.sendRequest)(formData).then(function (r) {
         return (0,_responseGetter__WEBPACK_IMPORTED_MODULE_2__.handleResponse)();
       });
+    } else {
+      alert(translations[locale].selectR);
     }
   });
   function checkVariablesSet() {

@@ -30,9 +30,13 @@ public class AreaCheckServlet extends jakarta.servlet.http.HttpServlet {
         double y, r;
         double[] xValues;
         try {
-            xValues = Arrays.stream(request.getParameterValues("X")).mapToDouble(Double::parseDouble).toArray();
-            y = Double.parseDouble(request.getParameter("Y"));
-            r = Double.parseDouble(request.getParameter("R"));
+            xValues = Arrays.stream(request.getParameterValues("X"))
+                    .mapToDouble(Double::parseDouble)
+                    .map(d -> Math.round(d * 1000.0) / 1000.0)
+                    .toArray();
+
+            y = Math.round(Double.parseDouble(request.getParameter("Y")) * 1000.0) / 1000.0;
+            r = Math.round(Double.parseDouble(request.getParameter("R")) * 1000.0) / 1000.0;
         } catch (NumberFormatException e) {
             request.setAttribute("errorMessage", "Неверный формат данных");
             logger.info("Invalid data format");
@@ -56,7 +60,7 @@ public class AreaCheckServlet extends jakarta.servlet.http.HttpServlet {
             double startTime = Long.parseLong(request.getAttribute("startTime").toString());
             double endTime = System.nanoTime();
 
-            hit.setExecutionTime(String.valueOf((endTime - startTime) / 1000000));
+            hit.setExecutionTime(String.valueOf(Math.round(((endTime - startTime) / 1000000) * 1000.0) / 1000.0));
             hitHistory.getHitList().add(hit);
             currentHitHistory.getHitList().add(hit);
             logger.info(hit + "added to history");

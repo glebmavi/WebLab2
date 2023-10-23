@@ -78,6 +78,7 @@
             <td class="formRow">
               <label for="RSelect"></label>
               <select name="R" id="RSelect">
+                  <option value="" disabled selected hidden><fmt:message key="index.selectR"/></option>
                 <%
                 for (String value : selectValues) {
                 %>
