@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="custom" uri="/WebProgLab2/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:setLocale value="${param.sessionLocale}"/>
 <fmt:setBundle basename="i18n.messages"/>
@@ -23,6 +24,12 @@
         <fmt:message key="error404.notFound"/> - 404
     </h1>
     <img src="https://http.cat/images/404.jpg" alt="404 Not Found Cat">
+
+    <div>
+        <custom:wordCount word="JSP" imgPath="assets/relevantMeme.jpg">
+            dsnvivbfjkjasoisbfvisjewfbgfjosidew jfjsp JSP a sdas da sd asd asda JSP JSP JSP AAAAAAAAAAAAAA
+        </custom:wordCount>
+    </div>
 
     <div>
         <a href="${pageContext.request.contextPath}/">
