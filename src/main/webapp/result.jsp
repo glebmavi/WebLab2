@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setLocale value="${sessionScope.sessionLocale}"/>
 <fmt:setBundle basename="i18n.messages"/>
 <!DOCTYPE html>
-<html lang="${sessionScope.lang}">
+<html lang="${sessionScope.sessionLocale}">
 <head>
     <title>Result</title>
     <meta charset="UTF-8">

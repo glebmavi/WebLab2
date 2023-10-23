@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${param.sessionLocale}"/>
+<fmt:setLocale value="${sessionScope.sessionLocale}"/>
 <fmt:setBundle basename="i18n.messages"/>
 <%
   String[] checkboxValues = {"-4", "-3", "-2", "-1", "0", "1", "2", "3", "4"};
@@ -9,7 +9,7 @@
 %>
 
 <!DOCTYPE html>
-<html lang="${param.sessionLocale}">
+<html lang="${sessionScope.sessionLocale}">
 <head>
   <meta charset="UTF-8">
   <title>Lab2</title>

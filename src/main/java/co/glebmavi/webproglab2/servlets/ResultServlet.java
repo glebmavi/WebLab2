@@ -22,7 +22,6 @@ public class ResultServlet extends jakarta.servlet.http.HttpServlet {
     protected void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response) throws jakarta.servlet.ServletException, java.io.IOException {
         logger.info("doGet() called");
         logger.info("Redirecting to result.jsp");
-        request.setAttribute("lang", request.getParameter("lang"));
         request.setAttribute("currentHitHistory", request.getSession().getAttribute("currentHitHistory"));
         request.getRequestDispatcher("/result.jsp").forward(request, response);
     }
