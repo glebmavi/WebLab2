@@ -9,6 +9,7 @@ function drawFromTable() {
     const xValues = document.getElementsByClassName("xTableData");
     const yValues = document.getElementsByClassName("yTableData");
     const rValues = document.getElementsByClassName("rTableData");
+    const hitValues = document.getElementsByClassName("isHitTableData");
     let rValue;
     if (document.getElementById('RSelect') === null) {
         rValue = rValues[0].innerHTML
@@ -17,7 +18,7 @@ function drawFromTable() {
     }
     drawR(rValue, RText, RHalfText, MinusRHalfText, MinusRText);
     for (let i = 0; i < xValues.length; i++) {
-        drawPoint(xValues[i].innerHTML, yValues[i].innerHTML, rValue, svgGraph);
+        drawPoint(xValues[i].innerHTML, yValues[i].innerHTML, rValue, svgGraph, hitValues[i].innerHTML);
     }
 
 }

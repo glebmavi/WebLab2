@@ -9,7 +9,7 @@
             <polygon class="marker" points="0 3, 6 6, 6 0" />
         </marker>
 
-        <circle r="0.25" id="circle" fill="red"/>
+        <circle r="0.25" id="circle"/>
     </defs>
 
     <!--Shapes-->
