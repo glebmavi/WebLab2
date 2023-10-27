@@ -26,7 +26,7 @@
     <img src="https://http.cat/images/404.jpg" alt="404 Not Found Cat">
 
     <div>
-        <custom:wordCount word="JSP" imgPath="assets/relevantMeme.jpg">
+        <custom:wordCount word="JSP" imgPath="assets/relevantMeme.jpg" phrase="Я люблю JSP!<br>">
             dsnvivbfjkjasoisbfvisjewfbgfjosidew jfjsp JSP a sdas da sd asd asda JSP JSP JSP AAAAAAAAAAAAAA
         </custom:wordCount>
     </div>

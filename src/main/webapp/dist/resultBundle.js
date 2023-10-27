@@ -71,6 +71,7 @@ function drawFromTable() {
   var xValues = document.getElementsByClassName("xTableData");
   var yValues = document.getElementsByClassName("yTableData");
   var rValues = document.getElementsByClassName("rTableData");
+  var hitValues = document.getElementsByClassName("isHitTableData");
   var rValue;
   if (document.getElementById('RSelect') === null) {
     rValue = rValues[0].innerHTML;
@@ -79,7 +80,7 @@ function drawFromTable() {
   }
   (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawR)(rValue, RText, RHalfText, MinusRHalfText, MinusRText);
   for (var i = 0; i < xValues.length; i++) {
-    (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawPoint)(xValues[i].innerHTML, yValues[i].innerHTML, rValue, svgGraph);
+    (0,_drawer__WEBPACK_IMPORTED_MODULE_0__.drawPoint)(xValues[i].innerHTML, yValues[i].innerHTML, rValue, svgGraph, hitValues[i].innerHTML);
   }
 }
 
@@ -147,13 +148,18 @@ function drawR(R, RText, RHalfText, MinusRHalfText, MinusRText) {
     _iterator4.f();
   }
 }
-function drawPoint(X, Y, R, svgGraph) {
+function drawPoint(X, Y, R, svgGraph, isHit) {
   var multiplier = 6 / R;
   var newPoint = document.createElementNS("http://www.w3.org/2000/svg", 'use');
   newPoint.setAttribute("x", (X * multiplier).toString());
   newPoint.setAttribute("y", (Y * -multiplier).toString());
   newPoint.setAttribute("href", "#circle");
   newPoint.setAttribute("class", "usedCircle");
+  if (isHit === "true") {
+    newPoint.setAttribute("fill", "green");
+  } else if (isHit === "false") {
+    newPoint.setAttribute("fill", "red");
+  }
   svgGraph.append(newPoint);
 }
 function removePoints() {
